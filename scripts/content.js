@@ -1,30 +1,16 @@
-// content.js
-// chrome.runtime.sendMessage({ message: "dataLoaded", data: document.title });
-
-
-function collectData() {
-    // Collect data from the web page
-    
-    var data = {
-        documentTitle: document.title,
-        name: "Sarang",
-        surname: "Shahane",
-        cartflows: window.cartflows
-    };
-
-    console.log( data );
-    // Send data to background.js
-    chrome.runtime.sendMessage({ message: "dataLoaded", data: data });
+function injectScript() {
+    const script = document.createElement("script");
+    script.src = chrome.runtime.getURL("scripts/injected.js");
+    script.onload = () => script.remove();
+    (document.head || document.documentElement).appendChild(script);
 }
-  
-// Check if the document is already loaded, and if not, wait for it to be loaded
-if (document.readyState === "complete" || document.readyState === "interactive") {
-    // Document is already loaded, collect data
-    collectData();
-} else {
-    // Wait for the window to be fully loaded
-    window.onload = function () {
-        // Document is now loaded, collect data
-        collectData();
-    };
-}
+
+window.addEventListener("message", (event) => {
+    if (event.source !== window || event.data.action !== "cartflows_data") return;
+
+    chrome.storage.local.set({ cartflows: event.data.data }, () => {
+        chrome.runtime.sendMessage({ action: "cartflows_data", data: event.data.data }, (response) => {});
+    });
+});
+
+injectScript();

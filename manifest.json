@@ -28,6 +28,12 @@
       "js": ["scripts/content.js"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["scripts/injected.js"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
   "icons": {
     "16": "icons/icon.png",
     "48": "icons/icon.png",
