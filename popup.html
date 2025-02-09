@@ -1,0 +1,41 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Extension Popup</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        text-align: left;
+        height: 300px;
+        width: 400px;
+    }
+    .main-wrapper{
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+    }
+    h2{
+        margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+    <div class="main-wrapper">
+      <h2>Data from Web Page:</h2>
+      <div id="dataContainer">
+        <h4 id="page-title"></h3>
+        <p id="fname"></p>
+        <p id="sname"></p>
+        <div id="cartflows-data"></div>
+        <div id="document"></div>
+      </div>
+    </div>
+    <script src="scripts/popup.js"></script>
+</body>
+</html>
